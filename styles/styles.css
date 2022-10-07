@@ -394,6 +394,10 @@ body {
     background: rgba(0, 0, 0, 0.6);
 }
 
+.mobile-mirror__content h2 {
+    margin-top: 5px;
+}
+
 .mobile-mirror__pagination {
     display: flex;
     gap: 12px;
