@@ -9,6 +9,7 @@
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <title>Azuki</title>
+
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
         <link rel="stylesheet" href="styles/styles.css" />
     </head>
@@ -188,7 +189,6 @@
             </div>
         </div>
         <div class="mobile-mirror">
-            <!--    <div class="mobile-mirror__img" style="background: url(images/image.jpg) no-repeat;"></div>-->
             <img src="images/image.jpg" alt="" class="mobile-mirror__img" />
             <div class="mobile-mirror__slider">
                 <div class="swiper-wrapper">
@@ -248,7 +248,7 @@
             const desktop = document.querySelector(".desktop-mirror");
             const mobileItem = document.querySelector(".mobile-mirror");
 
-            const expression = /(iPad|iPhone|iPod|BlackBerry)/i;
+            const expression = /(iPad|iPhone|iPod|BlackBerry|Android|Windows Phone|webOS|Opera Mini)/i;
 
             const supportsTouch = "ontouchstart" in window || navigator.msMaxTouchPoints;
 
