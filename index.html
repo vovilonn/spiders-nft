@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, minimal-ui"
+        />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Azuki</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+        <link rel="stylesheet" href="styles/styles.css" />
+    </head>
+    <body>
+        <header class="header">
+            <a href="#" class="logo">Azuki</a>
+            <div class="socials">
+                <a href="#" class="socials__item">
+                    <svg
+                        style="color: white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-twitter"
+                        viewBox="0 0 16 16"
+                    >
+                        <path
+                            d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"
+                            fill="white"
+                        ></path>
+                    </svg>
+                </a>
+                <a href="#" class="socials__item">
+                    <svg
+                        style="color: white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-discord"
+                        viewBox="0 0 16 16"
+                    >
+                        <path
+                            d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"
+                            fill="white"
+                        ></path>
+                    </svg>
+                </a>
+                <a href="#" class="socials__item">
+                    <svg
+                        style="color: white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="32"
+                        height="32"
+                        viewBox="0 0 32 32"
+                    >
+                        <path
+                            d="M29.919 6.163l-4.225 19.925c-0.319 1.406-1.15 1.756-2.331 1.094l-6.438-4.744-3.106 2.988c-0.344 0.344-0.631 0.631-1.294 0.631l0.463-6.556 11.931-10.781c0.519-0.462-0.113-0.719-0.806-0.256l-14.75 9.288-6.35-1.988c-1.381-0.431-1.406-1.381 0.288-2.044l24.837-9.569c1.15-0.431 2.156 0.256 1.781 2.013z"
+                            fill="white"
+                        ></path>
+                    </svg>
+                </a>
+            </div>
+        </header>
+
+        <div class="desktop-mirror" data-audio="media/intro-music.mp3" data-id="desktop-mirror-a">
+            <div class="preview">
+                <ul class="preview__list">
+                    <li class="preview__item">
+                        <h2>WELCOME TO THE ALLEY</h2>
+                        <p>The mystical red bean.</p>
+                        <p>Few have ever seen it, fewer have ever taken one.</p>
+                        <p>Are you ready to take the red bean?</p>
+                    </li>
+                    <li class="preview__item hidden">
+                        <h2>THROUGH THE GATE</h2>
+                        <p>The mystical red bean.</p>
+                        <p>Few have ever seen it, fewer have ever taken one.</p>
+                        <p>Are you ready to take the red bean?</p>
+                    </li>
+                    <li class="preview__item hidden">
+                        <h2>WELCOME TO THE ALLEY</h2>
+                        <p>The mystical red bean.</p>
+                        <p>Few have ever seen it, fewer have ever taken one.</p>
+                        <p>Are you ready to take the red bean?</p>
+                    </li>
+                    <li class="preview__item hidden">
+                        <h2>WELCOME TO THE ALLEY 2</h2>
+                        <p>The mystical red bean.</p>
+                        <p>Few have ever seen it, fewer have ever taken one.</p>
+                        <p>Are you ready to take the red bean?</p>
+                    </li>
+                </ul>
+                <button class="preview__btn">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="50"
+                        height="50"
+                        fill="currentColor"
+                        class="bi bi-arrow-right"
+                        viewBox="0 0 16 16"
+                    >
+                        <path
+                            fill="white"
+                            fill-rule="evenodd"
+                            d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+                        />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="img-container">
+                <img src="images/image.jpg" class="img" />
+
+                <div class="pin-container">
+                    <div class="pin" data-audio="media/beep.mp3" style="left: 4%; top: 53%">
+                        <div class="pin__dot">
+                            <div class="pin__circle"></div>
+                            <div class="pin__pulse"></div>
+                        </div>
+                        <div class="pin__title">
+                            Spiders need snackys to improve their strength and produce more $SILK
+                        </div>
+                    </div>
+                    <div class="pin" data-audio="media/beep.mp3" style="left: 38%; top: 41%">
+                        <div class="pin__dot">
+                            <div class="pin__circle"></div>
+                            <div class="pin__pulse"></div>
+                        </div>
+                        <div class="pin__title">Big Spider is watching. We need recruits.</div>
+                    </div>
+                    <div class="pin" data-audio="media/beep.mp3" style="left: 15%; top: 72%">
+                        <div class="pin__dot">
+                            <div class="pin__circle"></div>
+                            <div class="pin__pulse"></div>
+                        </div>
+                        <div class="pin__title">
+                            When the red phone rings… That means only one thing - spiders get private intel. They know
+                            people who know people who know people
+                        </div>
+                    </div>
+                    <div class="pin" data-audio="media/beep2.wav" style="left: 74%; top: 54%">
+                        <div class="pin__dot">
+                            <div class="pin__circle"></div>
+                            <div class="pin__pulse"></div>
+                        </div>
+                        <div class="pin__title">
+                            Uniqueness of every Artropod holds special significance. With your Artropod you will open up
+                            a world where every anon can feel oneness with others and move on a sticky metaverse web
+                            trap instead of being glued… It doesn’t matter if you are small one, bigger spiders will
+                            always help you to grow faster.
+                        </div>
+                    </div>
+                    <div class="pin" data-audio="media/beep2.wav" style="left: 91%; top: 61%">
+                        <div class="pin__dot">
+                            <div class="pin__circle"></div>
+                            <div class="pin__pulse"></div>
+                        </div>
+                        <div class="pin__title">
+                            We produce $SILK to build the LAN - private network which is necessary to find each other,
+                            recruit and operate. Anelosimus eximius but in web3. The LAN is the only solution to stay
+                            connected before we all get to the Cove.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="desktop-mirror__title">THE ALLEY</div>
+
+            <div class="bottom-nav">
+                <button class="btn-sound">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        aria-hidden="true"
+                        class="w-3 h-3"
+                    >
+                        <path
+                            fill-rule="evenodd"
+                            d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM12.293 7.293a1 1 0 011.414 0L15 8.586l1.293-1.293a1 1 0 111.414 1.414L16.414 10l1.293 1.293a1 1 0 01-1.414 1.414L15 11.414l-1.293 1.293a1 1 0 01-1.414-1.414L13.586 10l-1.293-1.293a1 1 0 010-1.414z"
+                            clip-rule="evenodd"
+                        ></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="mobile-mirror">
+            <!--    <div class="mobile-mirror__img" style="background: url(images/image.jpg) no-repeat;"></div>-->
+            <img src="images/image.jpg" alt="" class="mobile-mirror__img" />
+            <div class="mobile-mirror__slider">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" data-size="130vh" data-position="-45vh, -10vh">
+                        <div class="mobile-mirror__content">
+                            <h2>MONITORS</h2>
+                            <p>Big Spider is watching. We need recruits.</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide" data-size="210vh" data-position="0, -95vh">
+                        <div class="mobile-mirror__content">
+                            <h2>CHIPS</h2>
+                            <p>Spiders need snackys to improve their strength and produce more $SILK</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide" data-size="280vh" data-position="-40vh, -160vh">
+                        <div class="mobile-mirror__content">
+                            <h2>PHONE</h2>
+                            <p>When the red phone rings…</p>
+                            <p>That means only one thing - spiders get private intel.</p>
+                            <p>They know people who know people who know people.</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide" data-size="160vh" data-position="-160vh, -50vh">
+                        <div class="mobile-mirror__content">
+                            <h2>FLASKS:</h2>
+                            <p>Uniqueness of every Artropod holds special significance.</p>
+                            <p>
+                                With your Artropod you will open up a world where every anon can feel oneness with
+                                others and move on a sticky metaverse web trap instead of being glued…
+                            </p>
+                            <p>
+                                It doesn’t matter if you are small one, bigger spiders will always help you to grow
+                                faster.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide" data-size="240vh" data-position="-319vh, -108vh">
+                        <div class="mobile-mirror__content">
+                            <h2>Web:</h2>
+                            <p>
+                                We produce $SILK to build the LAN - private network which is necessary to find each
+                                other, recruit and operate.
+                            </p>
+                            <p>Anelosimus eximius but in web3.</p>
+                            <p>The LAN is the only solution to stay connected before we all get to the Cove.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mobile-mirror__pagination"></div>
+            </div>
+        </div>
+        <div class="audio-wrapper"></div>
+
+        <script>
+            const desktop = document.querySelector(".desktop-mirror");
+            const mobileItem = document.querySelector(".mobile-mirror");
+
+            const expression = /(iPad|iPhone|iPod|BlackBerry)/i;
+
+            const supportsTouch = "ontouchstart" in window || navigator.msMaxTouchPoints;
+
+            if (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 0 && supportsTouch) {
+                desktop.style.display = "none";
+                mobileItem.style.display = "block";
+            } else if (expression.test(window.navigator.userAgent)) {
+                desktop.style.display = "none";
+                mobileItem.style.display = "block";
+            } else {
+                desktop.style.display = "block";
+                mobileItem.style.display = "none";
+            }
+            addEventListener(
+                "load",
+                function () {
+                    window.scrollTo(1, 0);
+                },
+                false
+            );
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+        <script src="js/app.js"></script>
+    </body>
+</html>
