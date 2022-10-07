@@ -5,8 +5,8 @@
 }
 
 @font-face {
-    src: url('../fonts/pft.woff2') format('woff2');
-    font-family: 'pft-ak';
+    src: url("../fonts/pft.woff2") format("woff2");
+    font-family: "pft-ak";
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -21,7 +21,7 @@ body {
     overflow-x: hidden;
 }
 
-.header  {
+.header {
     position: absolute;
     top: 0;
     left: 0;
@@ -45,14 +45,14 @@ body {
     font-size: 20px;
     color: #fff;
     padding: 5px 8px;
-    transition: background-color .3s ease-in;
+    transition: background-color 0.3s ease-in;
     cursor: pointer;
     text-decoration: none;
     border-radius: 3px;
 }
 
 .logo:hover {
-    background-color: rgb(225,29,72);
+    background-color: rgb(225, 29, 72);
 }
 
 .socials {
@@ -137,7 +137,7 @@ body {
     border-radius: 9999px;
     width: 20px;
     height: 20px;
-    background-color: rgba(255,255,255, 1);
+    background-color: rgba(255, 255, 255, 1);
     cursor: pointer;
     transition: opacity 2s ease-in-out;
 }
@@ -154,13 +154,13 @@ body {
 .pin__circle {
     transition-duration: 1s;
     transition-property: all;
-    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .pin__pulse {
-    background-color: hsla(0,0%,96.1%,.7);
+    background-color: hsla(0, 0%, 96.1%, 0.7);
     border-radius: 9999px;
-    animation: ping 1s cubic-bezier(0,0,.2,1) infinite;
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
     width: 2rem;
     height: 2rem;
     display: inline-flex;
@@ -179,12 +179,8 @@ body {
     backdrop-filter: blur(4px);
     background-color: rgba(0, 0, 0, 0.7);
     color: #fff;
-    box-shadow:
-            0 1px 1px hsl(0deg 0% 0% / 8%),
-            0 2px 2px hsl(0deg 0% 0% / 8%),
-            0 4px 4px hsl(0deg 0% 0% / 8%),
-            0 8px 8px hsl(0deg 0% 0% / 8%),
-            0 16px 16px hsl(0deg 0% 0% / 8%);
+    box-shadow: 0 1px 1px hsl(0deg 0% 0% / 8%), 0 2px 2px hsl(0deg 0% 0% / 8%), 0 4px 4px hsl(0deg 0% 0% / 8%),
+        0 8px 8px hsl(0deg 0% 0% / 8%), 0 16px 16px hsl(0deg 0% 0% / 8%);
     transition: opacity 0.5s ease-in-out;
     opacity: 0;
     pointer-events: none;
@@ -206,7 +202,8 @@ body {
 }
 
 @keyframes ping {
-    75%, 100% {
+    75%,
+    100% {
         transform: scale(2);
         opacity: 0;
     }
@@ -263,7 +260,7 @@ body {
     z-index: 300;
     color: #fff;
     background-color: rgba(0, 0, 0, 0.9);
-    transition: background-color 0.3s ease-in-out, opacity .3s;
+    transition: background-color 0.3s ease-in-out, opacity 0.3s;
 }
 
 .preview.hidden {
@@ -278,7 +275,6 @@ body {
     left: 40px;
 }
 
-
 .preview__item.hidden {
     height: 0;
     opacity: 0;
@@ -286,7 +282,7 @@ body {
 }
 
 .preview__item h2 {
-    color: rgba(190,18,60);
+    color: rgba(190, 18, 60);
     font-weight: 800;
     font-size: 36px;
     margin-bottom: 8px;
@@ -294,7 +290,6 @@ body {
     animation: bottomAnim 1s;
     animation-fill-mode: forwards;
     animation-delay: 0.5s;
-
 }
 
 .preview__item p {
@@ -306,7 +301,8 @@ body {
     animation-delay: 0.5s;
 }
 
-.preview__item.hidden p, .preview__item.hidden h2 {
+.preview__item.hidden p,
+.preview__item.hidden h2 {
     animation: none;
 }
 
@@ -357,7 +353,7 @@ body {
 }
 
 .mobile-mirror__img {
-    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 1.5s;
     max-width: none;
     display: block;
@@ -380,7 +376,7 @@ body {
 }
 
 .mobile-mirror__slider p {
-    font-size: .875rem;
+    font-size: 0.875rem;
     line-height: 1.25rem;
 }
 
@@ -397,6 +393,7 @@ body {
     height: fit-content;
     padding: 0 0 40px 20px;
     width: 100%;
+    background: rgba(0, 0, 0, 0.6);
 }
 
 .mobile-mirror__pagination {
