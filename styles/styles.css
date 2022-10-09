@@ -40,19 +40,27 @@ body {
 }
 
 .logo {
-    background-color: rgb(192, 53, 64);
-    text-transform: uppercase;
-    font-size: 20px;
-    color: #fff;
-    padding: 5px 8px;
-    transition: background-color 0.3s ease-in;
-    cursor: pointer;
-    text-decoration: none;
-    border-radius: 3px;
+    width: 60px;
+    max-height: 100%;
+    transition: all 0.3s;
+    /* background-color: rgb(192, 53, 64); */
+    /* text-transform: uppercase; */
+    /* font-size: 20px; */
+    /* color: #fff; */
+    /* padding: 5px 8px; */
+    /* transition: background-color 0.3s ease-in; */
+    /* cursor: pointer; */
+    /* text-decoration: none; */
+    /* border-radius: 3px; */
+}
+
+.logo-img {
+    width: 100%;
 }
 
 .logo:hover {
-    background-color: rgb(225, 29, 72);
+    opacity: 0.9;
+    transition: all 0.3s;
 }
 
 .socials {
@@ -96,6 +104,32 @@ body {
     position: absolute;
     max-width: 100%;
     height: auto;
+    z-index: 1;
+}
+
+.img__phone {
+    z-index: 2;
+}
+
+.overlay {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 15;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: background-color 0.3s ease-in-out, opacity 0.3s;
+}
+
+.overlay__active {
+    display: block;
+}
+
+.img__active {
+    z-index: 15;
 }
 
 .desktop-mirror__img {
@@ -132,8 +166,8 @@ body {
 .pin__dot {
     position: absolute;
     border-radius: 9999px;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     background-color: rgba(255, 255, 255, 1);
     cursor: pointer;
     transition: opacity 2s ease-in-out;
@@ -157,12 +191,12 @@ body {
 .pin__pulse {
     background-color: hsla(0, 0%, 96.1%, 0.7);
     border-radius: 9999px;
-    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
-    width: 2rem;
-    height: 2rem;
+    animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+    width: 15px;
+    height: 15px;
     display: inline-flex;
     position: absolute;
-    margin: -5px 0 0 -5px;
+    margin: -0.4px 0 0 -0.3px;
 }
 
 .pin__title {
@@ -181,9 +215,10 @@ body {
     transition: opacity 0.5s ease-in-out;
     opacity: 0;
     pointer-events: none;
+    z-index: 20;
 }
 
-.pin.active .pin__title {
+.pin--active .pin__title {
     opacity: 1;
     pointer-events: initial;
 }
@@ -355,6 +390,42 @@ body {
     display: block;
     vertical-align: middle;
     transition: all 2s;
+    position: absolute;
+}
+
+.mobile-mirror__img-layer {
+    max-width: none;
+    display: block;
+    opacity: 0;
+    vertical-align: middle;  
+    position: absolute;
+    transition-property: opacity;
+    transition-duration: 0.1s;
+}
+
+.layer-active {
+    opacity: 1;
+    z-index: 20;
+    transition-property: opacity;
+    transition-duration: 2s;
+    transition-delay: 2s;
+}
+
+.layer-img {
+    /* width: 100%; */
+    height: 100%;
+}
+
+.mobile-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 15;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.6);
+    transition: background-color 0.3s ease-in-out, opacity 0.3s 5s;
 }
 
 .mobile-mirror__slider {
@@ -364,6 +435,7 @@ body {
     width: 100%;
     height: fit-content;
     color: #fff;
+    z-index: 1000;
 }
 
 .mobile-mirror__slider h2 {

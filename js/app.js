@@ -2,7 +2,30 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const pins = document.querySelectorAll('.pin');
 
+    const overlay = document.querySelector('.overlay');
+
+    // console.log(overlay)
+
     if (pins) {
+
+        document.addEventListener('click', function (e) {
+            // console.log(e.target)
+            // console.log(e.target === document.querySelector('.pin__pulse'))
+            if (e.target === document.querySelector('.pin__phone') || e.target === document.querySelector('.pin__web') || e.target === document.querySelector('.pin__incub') || e.target === document.querySelector('.pin__chips') || e.target === document.querySelector('.pin__screen')) {
+                return
+            } else {
+                if (document.querySelector('.pin--active')) {
+                    document.querySelector('.pin--active').classList.remove('pin--active');
+                    overlay.classList.remove('overlay__active')
+                }
+
+                if (document.querySelector('.img__active')) {
+                    document.querySelector('.img__active').classList.remove('img__active');
+                    overlay.classList.remove('overlay__active')
+                }
+            }
+        });
+
         pins.forEach(pin => {
 
             if (pin.getBoundingClientRect().left > 500) pin.classList.add('pin-r');
@@ -19,12 +42,52 @@ window.addEventListener('DOMContentLoaded', () => {
                 pinSound.play();
             })
 
-            document.addEventListener('click', function (e) {
+            
+
+            pin.addEventListener('click', function (e) {
+                // console.log(e.target)
 
                 if (e.target === pin.querySelector('.pin__pulse') || e.target === pin.querySelector('.pin__title')) {
-                    pin.classList.add('active');
-                } else {
-                    pin.classList.remove('active');
+
+                    if (document.querySelector('.pin--active')) {
+                        document.querySelector('.pin--active').classList.remove('pin--active');
+                        // overlay.classList.remove('overlay__active')
+                    }
+
+                    if (document.querySelector('.img__active')) {
+                        document.querySelector('.img__active').classList.remove('img__active');
+                        overlay.classList.remove('overlay__active')
+                    }
+
+                    pin.classList.add('pin--active');
+                    // console.log(overlay);
+                    overlay.classList.add('overlay')
+                    overlay.classList.add('overlay__active')
+
+                    if (e.target === pin.querySelector('.pin__chips')) {
+                        // console.log('1');
+                        document.querySelector('.img__chips').classList.add('img__active');
+                    }
+
+                    if (e.target === pin.querySelector('.pin__screen')) {
+                        // console.log('1');
+                        document.querySelector('.img__screen').classList.add('img__active');
+                    }
+
+                    if (e.target === pin.querySelector('.pin__phone')) {
+                        // console.log('1');
+                        document.querySelector('.img__phone').classList.add('img__active');
+                    }
+
+                    if (e.target === pin.querySelector('.pin__incub')) {
+                        // console.log('1');
+                        document.querySelector('.img__incub').classList.add('img__active');
+                    }
+
+                    if (e.target === pin.querySelector('.pin__web')) {
+                        // console.log('1');
+                        document.querySelector('.img__web').classList.add('img__active');
+                    }
                 }
             })
 
@@ -124,10 +187,19 @@ window.addEventListener('DOMContentLoaded', () => {
         const currentSlide = swiper.slides[index_currentSlide];
 
         const images = document.querySelector('.mobile-mirror__img');
+        const layers = document.querySelectorAll('.mobile-mirror__img-layer')
+
+        if (document.querySelector('.layer-active')) {
+            document.querySelector('.layer-active').classList.remove('layer-active')
+        }
 
         if (currentSlide) {
             images.style.transform = `translate(${currentSlide.getAttribute('data-position')})`;
             images.style.height = `${currentSlide.getAttribute('data-size')}`;
+
+            layers[index_currentSlide].firstChild.style.transform = `translate(${currentSlide.getAttribute('data-position')})`;
+            layers[index_currentSlide].firstChild.style.height = `${currentSlide.getAttribute('data-size')}`;
+            layers[index_currentSlide].classList.add('layer-active');
         }
 
     }

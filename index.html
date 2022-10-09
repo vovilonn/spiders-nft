@@ -15,7 +15,7 @@
     </head>
     <body>
         <header class="header">
-            <a href="#" class="logo">Azuki</a>
+            <a href="#" class="logo"><img src="images/logo3.png" class="logo-img" /></a>
             <div class="socials">
                 <a href="#" class="socials__item">
                     <svg
@@ -49,7 +49,7 @@
                         ></path>
                     </svg>
                 </a>
-                <a href="#" class="socials__item">
+                <!-- <a href="#" class="socials__item">
                     <svg
                         style="color: white"
                         xmlns="http://www.w3.org/2000/svg"
@@ -62,12 +62,12 @@
                             fill="white"
                         ></path>
                     </svg>
-                </a>
+                </a> -->
             </div>
         </header>
 
         <div class="desktop-mirror" data-audio="media/intro-music.mp3" data-id="desktop-mirror-a">
-            <div class="preview">
+            <!-- <div class="preview">
                 <ul class="preview__list">
                     <li class="preview__item">
                         <h2>WELCOME TO THE ALLEY</h2>
@@ -110,16 +110,22 @@
                         />
                     </svg>
                 </button>
-            </div>
+            </div> -->
 
             <div class="img-container">
-                <img src="images/image.jpg" class="img" />
+                <div class="overlay"></div>
+                <img src="images/общ.png" class="img" />
+                <img src="images/колба.png" class="img img__incub" />
+                <img src="images/паутина.png" class="img img__web" />
+                <img src="images/стеллаж.png" class="img img__chips" />
+                <img src="images/телефон.png" class="img img__phone" />
+                <img src="images/экран.png" class="img img__screen" />
 
                 <div class="pin-container">
                     <div class="pin" data-audio="media/beep.mp3" style="left: 4%; top: 53%">
                         <div class="pin__dot">
                             <div class="pin__circle"></div>
-                            <div class="pin__pulse"></div>
+                            <div class="pin__pulse pin__chips"></div>
                         </div>
                         <div class="pin__title">
                             Spiders need snackys to improve their strength and produce more $SILK
@@ -128,14 +134,14 @@
                     <div class="pin" data-audio="media/beep.mp3" style="left: 38%; top: 41%">
                         <div class="pin__dot">
                             <div class="pin__circle"></div>
-                            <div class="pin__pulse"></div>
+                            <div class="pin__pulse pin__screen"></div>
                         </div>
                         <div class="pin__title">Big Spider is watching. We need recruits.</div>
                     </div>
                     <div class="pin" data-audio="media/beep.mp3" style="left: 15%; top: 72%">
                         <div class="pin__dot">
                             <div class="pin__circle"></div>
-                            <div class="pin__pulse"></div>
+                            <div class="pin__pulse pin__phone"></div>
                         </div>
                         <div class="pin__title">
                             When the red phone rings… That means only one thing - spiders get private intel. They know
@@ -145,7 +151,7 @@
                     <div class="pin" data-audio="media/beep2.wav" style="left: 74%; top: 54%">
                         <div class="pin__dot">
                             <div class="pin__circle"></div>
-                            <div class="pin__pulse"></div>
+                            <div class="pin__pulse pin__incub"></div>
                         </div>
                         <div class="pin__title">
                             Uniqueness of every Artropod holds special significance. With your Artropod you will open up
@@ -157,7 +163,7 @@
                     <div class="pin" data-audio="media/beep2.wav" style="left: 91%; top: 61%">
                         <div class="pin__dot">
                             <div class="pin__circle"></div>
-                            <div class="pin__pulse"></div>
+                            <div class="pin__pulse pin__web"></div>
                         </div>
                         <div class="pin__title">
                             We produce $SILK to build the LAN - private network which is necessary to find each other,
@@ -168,7 +174,7 @@
                 </div>
             </div>
 
-            <div class="desktop-mirror__title">THE ALLEY</div>
+            <div class="desktop-mirror__title">THE CRYPT</div>
 
             <div class="bottom-nav">
                 <button class="btn-sound">
@@ -189,24 +195,32 @@
             </div>
         </div>
         <div class="mobile-mirror">
-            <img src="images/image.jpg" alt="" class="mobile-mirror__img" />
+            <div class="mobile-overlay"></div>
+            <img src="images/общ.png" alt="" class="mobile-mirror__img" />
+            <div class="mobile-mirror__img-layer img__screen"><img src="images/экран.png" class="layer-img" /></div>
+            <div class="mobile-mirror__img-layer img__chips"><img src="images/стеллаж.png" class="layer-img" /></div>
+            <div class="mobile-mirror__img-layer img__phone"><img src="images/телефон.png" class="layer-img" /></div>
+            <div class="mobile-mirror__img-layer img__incub"><img src="images/колба.png" class="layer-img" /></div>
+            <div class="mobile-mirror__img-layer img__web"><img src="images/паутина.png" class="layer-img" /></div>
+            
+            
             <div class="mobile-mirror__slider">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide" data-size="130vh" data-position="-45vh, -10vh">
+                    <div class="swiper-slide" data-size="110vh" data-position="-35vh, -10vh">
                         <div class="mobile-mirror__content">
-                            <h2>MONITORS</h2>
+                            <!-- <h2>MONITORS</h2> -->
                             <p>Big Spider is watching. We need recruits.</p>
                         </div>
                     </div>
-                    <div class="swiper-slide" data-size="210vh" data-position="0, -95vh">
+                    <div class="swiper-slide" data-size="235vh" data-position="0, -95vh">
                         <div class="mobile-mirror__content">
-                            <h2>CHIPS</h2>
+                            <!-- <h2>CHIPS</h2> -->
                             <p>Spiders need snackys to improve their strength and produce more $SILK</p>
                         </div>
                     </div>
-                    <div class="swiper-slide" data-size="280vh" data-position="-40vh, -160vh">
+                    <div class="swiper-slide" data-size="250vh" data-position="-39vh, -130vh">
                         <div class="mobile-mirror__content">
-                            <h2>PHONE</h2>
+                            <!-- <h2>PHONE</h2> -->
                             <p>When the red phone rings…</p>
                             <p>That means only one thing - spiders get private intel.</p>
                             <p>They know people who know people who know people.</p>
@@ -214,7 +228,7 @@
                     </div>
                     <div class="swiper-slide" data-size="160vh" data-position="-160vh, -50vh">
                         <div class="mobile-mirror__content">
-                            <h2>FLASKS:</h2>
+                            <!-- <h2>FLASKS:</h2> -->
                             <p>Uniqueness of every Artropod holds special significance.</p>
                             <p>
                                 With your Artropod you will open up a world where every anon can feel oneness with
@@ -228,7 +242,7 @@
                     </div>
                     <div class="swiper-slide" data-size="240vh" data-position="-319vh, -108vh">
                         <div class="mobile-mirror__content">
-                            <h2>Web:</h2>
+                            <!-- <h2>Web:</h2> -->
                             <p>
                                 We produce $SILK to build the LAN - private network which is necessary to find each
                                 other, recruit and operate.
