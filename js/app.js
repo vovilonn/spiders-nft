@@ -128,44 +128,44 @@ window.addEventListener('DOMContentLoaded', () => {
     })
 
 
-    function stepSlider () {
-        const
-            btn = document.querySelector('.preview__btn'),
-            allTabs = document.querySelectorAll('.preview__item'),
-            preview = document.querySelector('.preview');
+    // function stepSlider () {
+    //     const
+    //         btn = document.querySelector('.preview__btn'),
+    //         allTabs = document.querySelectorAll('.preview__item'),
+    //         preview = document.querySelector('.preview');
 
-        let opBg = 0.9;
-        let counter = 0;
+    //     let opBg = 0.9;
+    //     let counter = 0;
 
-        btn.addEventListener('click', function () {
-
-
-            if (counter === allTabs.length - 1) {
-                hide(preview);
-            } else {
-                hide(allTabs[counter]);
-                show(allTabs[counter + 1]);
-                counter++;
-            }
-        });
-
-        function show(elem){
-            elem.classList.remove('hidden');
-
-            if (opBg >= 0.7) {
-                preview.style.backgroundColor = `rgba(0, 0, 0, ${opBg -= 0.1})`;
-             }
+    //     btn.addEventListener('click', function () {
 
 
-        }
+    //         if (counter === allTabs.length - 1) {
+    //             hide(preview);
+    //         } else {
+    //             hide(allTabs[counter]);
+    //             show(allTabs[counter + 1]);
+    //             counter++;
+    //         }
+    //     });
 
-        function hide(elem){
-            elem.classList.add('hidden');
-        }
+    //     function show(elem){
+    //         elem.classList.remove('hidden');
+
+    //         if (opBg >= 0.7) {
+    //             preview.style.backgroundColor = `rgba(0, 0, 0, ${opBg -= 0.1})`;
+    //          }
 
 
-        }
-    stepSlider ();
+    //     }
+
+    //     function hide(elem){
+    //         elem.classList.add('hidden');
+    //     }
+
+
+    //     }
+    // stepSlider ();
 
     const swiper = new Swiper('.mobile-mirror__slider', {
         autoHeight: true,
