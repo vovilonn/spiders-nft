@@ -25,19 +25,13 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    padding: 30px;
+    padding: 15px 30px;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     z-index: 20;
-    opacity: 0;
-    transition: opacity 0.7s ease-in;
     z-index: 30;
-}
-
-.header:hover {
-    opacity: 1;
 }
 
 .logo {
@@ -102,6 +96,7 @@ body {
 }
 
 .img {
+    width: 100%;
     position: absolute;
     max-width: 100%;
     height: auto;
@@ -216,7 +211,7 @@ body {
     transition: opacity 0.5s ease-in-out;
     opacity: 0;
     pointer-events: none;
-    z-index: 20;
+    z-index: 99999;
 }
 
 .pin--active .pin__title {
@@ -379,6 +374,7 @@ body {
 }
 
 .mobile-mirror {
+    display: none;
     width: 100vw;
     height: 100vh; /* Use vh as a fallback for browsers that do not support Custom Properties */
     height: calc(var(--vh, 1vh) * 100);
@@ -398,7 +394,7 @@ body {
     max-width: none;
     display: block;
     opacity: 0;
-    vertical-align: middle;  
+    vertical-align: middle;
     position: absolute;
     transition-property: opacity;
     transition-duration: 0.1s;
@@ -501,6 +497,15 @@ body {
 @media (max-width: 1365px) {
     .header {
         opacity: 1;
+    }
+}
+
+@media (max-width: 425px) {
+    .desktop-mirror {
+        display: none;
+    }
+    .mobile-mirror {
+        display: block;
     }
 }
 
