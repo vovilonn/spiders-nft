@@ -161,10 +161,11 @@ body {
 
 .pin__dot {
     position: absolute;
-    border-radius: 9999px;
+    border-radius: 2px;
     width: 15px;
     height: 15px;
-    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 5px #d3d3d3;
+    background-color: rgb(255, 255, 255);
     cursor: pointer;
     transition: opacity 2s ease-in-out;
 }
@@ -186,7 +187,7 @@ body {
 
 .pin__pulse {
     background-color: hsla(0, 0%, 96.1%, 0.7);
-    border-radius: 9999px;
+    border-radius: 4px;
     animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
     width: 15px;
     height: 15px;
@@ -500,7 +501,7 @@ body {
     }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 1020px) {
     .desktop-mirror {
         display: none;
     }
