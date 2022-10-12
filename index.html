@@ -265,16 +265,14 @@
 
             const supportsTouch = "ontouchstart" in window || navigator.msMaxTouchPoints;
 
-            //if (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 0 && supportsTouch) {
-            //    desktop.style.display = "none";
-            //    mobileItem.style.display = "block";
-            //} else if (expression.test(window.navigator.userAgent)) {
-            //    desktop.style.display = "none";
-            //    mobileItem.style.display = "block";
-            //} else {
-            //    desktop.style.display = "block";
-            //    mobileItem.style.display = "none";
-            //}
+            if (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 0 && supportsTouch) {
+                desktop.style.display = "none";
+                mobileItem.style.display = "block";
+            } else if (expression.test(window.navigator.userAgent)) {
+                desktop.style.display = "none";
+                mobileItem.style.display = "block";
+            }
+
             addEventListener(
                 "load",
                 function () {
