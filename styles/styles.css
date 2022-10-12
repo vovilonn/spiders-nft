@@ -501,7 +501,7 @@ body {
     }
 }
 
-@media (max-width: 1360px) {
+@media only screen and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) {
     .desktop-mirror {
         display: none;
     }
