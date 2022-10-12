@@ -501,7 +501,7 @@ body {
     }
 }
 
-@media (max-width: 1020px) {
+@media (max-width: 1360px) {
     .desktop-mirror {
         display: none;
     }
