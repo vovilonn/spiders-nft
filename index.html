@@ -271,14 +271,14 @@
 
             const supportsTouch = "ontouchstart" in window || navigator.msMaxTouchPoints;
 
-            //window.onload = () => {
-            //    setTimeout(() => {
-            //        preloader.style.opacity = 0;
-            //    }, 600);
-            //    setTimeout(() => {
-            //        preloader.style.display = "none";
-            //    }, 1000);
-            //};
+            window.onload = () => {
+                setTimeout(() => {
+                    preloader.style.opacity = 0;
+                }, 600);
+                setTimeout(() => {
+                    preloader.style.display = "none";
+                }, 1000);
+            };
 
             //if (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 0 && supportsTouch) {
             //    desktop.style.display = "none";
