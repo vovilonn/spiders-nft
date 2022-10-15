@@ -14,6 +14,11 @@
         <link rel="stylesheet" href="styles/styles.css" />
     </head>
     <body>
+        <div class="preloader">
+            <img src="images/logo3.png" />
+            <p>THE CRYPT</p>
+            <span class="loader"></span>
+        </div>
         <header class="header">
             <a href="#" class="logo"><img src="images/logo3.png" class="logo-img" /></a>
             <div class="socials">
@@ -260,10 +265,20 @@
         <script>
             const desktop = document.querySelector(".desktop-mirror");
             const mobileItem = document.querySelector(".mobile-mirror");
+            const preloader = document.querySelector(".preloader");
 
             const expression = /(iPad|iPhone|iPod|BlackBerry|Android|Windows Phone|webOS|Opera Mini)/i;
 
             const supportsTouch = "ontouchstart" in window || navigator.msMaxTouchPoints;
+
+            window.onload = () => {
+                setTimeout(() => {
+                    preloader.style.opacity = 0;
+                }, 600);
+                setTimeout(() => {
+                    preloader.style.display = "none";
+                }, 1000);
+            };
 
             //if (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 0 && supportsTouch) {
             //    desktop.style.display = "none";
