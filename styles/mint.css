@@ -1,0 +1,135 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    min-width: 100%;
+    min-height: 100%;
+    background-color: white;
+    background-image: url('../images/mint.png');
+    background-size: auto 100%;
+    background-repeat: fill;
+    background-position: center top;
+    font-family: pft-ak, sans-serif;
+    overflow: hidden;
+}
+
+@font-face {
+    src: url("../fonts/pft.woff2") format("woff2");
+    font-family: "pft-ak";
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    padding-top: 10%;
+}
+
+.mintWindow {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 550px;
+}
+
+.mintWindow img {
+    min-width: 100%;
+}
+
+.counter {
+    padding-top: 10px;
+    position: absolute;
+    top: 16%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: black;
+    color: #349465;
+    height: min-content;
+    font-size: 28px;
+    text-align: center;
+    width: 40%;
+}
+
+.counterSection {
+    display: flex;
+    justify-content: center;
+    width: 184px;
+}
+
+.container img {
+    width: 100%;
+    height: auto;
+    z-index: -1;
+}
+
+.counterValue {
+    padding: 16px;
+}
+
+.counterBtn {
+    background: none;
+    color: #349465;
+    font-size: 30px;
+    padding: 12px 26px;
+    border: none;
+    cursor: pointer;
+}
+
+.container .btn {
+    position: absolute;
+    top: 73%;
+    left: 51%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #349465;
+    color: black;
+    font-size: 30px;
+    padding: 16px 150px;
+    border: none;
+    cursor: pointer;
+    font-family: pft-ak, sans-serif;
+}
+
+.container .btn:hover {
+    background-color: #235f42;
+    ;
+}
+
+@media screen and (max-width: 375px) {
+    * {
+        font-size: 20px;
+    }
+
+    .container{
+        padding-top: 100%;
+    }
+
+    .container .btn {
+        padding: 8px 80px;
+    }
+}
+
+@media screen and (min-width: 376px) and (max-width: 425px) {
+    .container{
+        padding-top: 54%;
+    }
+    .mintWindow{
+        width: 380px;
+    }
+    .counter{
+        font-size: 22px;
+    }
+    .container .btn {
+        padding: 10px 80px;
+    }
+}
+
+@media screen and (min-width: 426px) and (max-width: 768px) {
+    .container{
+        padding-top: 30%;
+    }
+}
