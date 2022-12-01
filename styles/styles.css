@@ -132,7 +132,7 @@ body {
     height: 100%;
     z-index: 15;
     color: #fff;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0btn, 0, 0, 0.7);
     transition: background-color 0.3s ease-in-out, opacity 0.3s;
 }
 
