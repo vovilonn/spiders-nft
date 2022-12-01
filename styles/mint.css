@@ -109,31 +109,39 @@ body {
     }
 
     .container {
-        padding-top: 100%;
+        padding-top: 40%;
     }
 
     .container .btn {
-        padding: 8px auto;
+        width: 0%;
+        padding: 10px 120px;
+        font-size: 22px;
     }
 }
+
 
 @media screen and (min-width: 376px) and (max-width: 425px) {
     .container {
         padding-top: 54%;
     }
+
     .mintWindow {
         width: 380px;
     }
+
     .counter {
         font-size: 22px;
     }
+
     .container .btn {
-        padding: 10px auto;
+        width: 0%;
+        padding: 10px 120px;
+        font-size: 22px;
     }
 }
 
 @media screen and (min-width: 426px) and (max-width: 768px) {
     .container {
-        padding-top: 30%;
+        padding-top: 15%;
     }
 }
