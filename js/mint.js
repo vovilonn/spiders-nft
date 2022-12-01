@@ -43,7 +43,7 @@ async function connectWallet() {
         const [account] = await window.ethereum.request({
             method: "eth_requestAccounts",
         });
-        refreshWL();
+        refreshWL(account);
         state.connected = true;
         state.address = account;
         mintBtn.text("MINT");
@@ -53,7 +53,7 @@ async function connectWallet() {
 }
 
 async function refreshWL(address) {
-    const res = await fetch(`https://api-gravediggers.defilab.space/check-with-statistic/${address}`);
+    const res = await fetch(`https://api-gravediggers.defilab.space/check-with-statistic/${address.toUpperCase()}`);
     const isWhitelisted = await res.json();
     isWhitelistedEl.text(isWhitelisted ? "You are whitelisted" : "You are not whitelisted");
 }
