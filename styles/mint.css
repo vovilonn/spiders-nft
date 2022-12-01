@@ -140,8 +140,24 @@ body {
     }
 }
 
-@media screen and (min-width: 426px) and (max-width: 768px) {
+@media screen and (min-width: 426px) and (max-width: 515px) {
     .container {
-        padding-top: 15%;
+        padding-top: 20%;
+    }
+    .container .btn {
+        width: 0%;
+        padding: 22px 154px;
+        font-size: 24px;
+    }
+}
+
+@media screen and (min-width: 516px) and (max-width: 768px) {
+    .container {
+        padding-top: 20%;
+    }
+    .container .btn {
+        width: 0%;
+        padding: 22px 164px;
+        font-size: 24px;
     }
 }
