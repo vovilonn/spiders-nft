@@ -36,10 +36,6 @@ body {
     width: 100%;
 }
 
-.mintWindow img {
-    min-width: 100%;
-}
-
 .counter {
     padding-top: 10px;
     position: absolute;
@@ -117,50 +113,44 @@ body {
     }
   }
 
-@media screen and (max-width: 375px) {
-    * {
-        font-size: 20px;
-    }
-
-    .container {
-        padding-top: 40%;
-    }
-
-    .container .btn {
-        width: 0%;
-        padding: 10px 120px;
-        font-size: 22px;
-    }
-}
-
-
-@media screen and (min-width: 376px) and (max-width: 425px) {
-    .container {
-        padding-top: 54%;
-    }
-
+@media screen and (min-width: 370px) and (max-width: 426px) {
+    
     .mintWindow {
-        width: 1000px;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        width: 90%;
+        bottom: -184px;
     }
 
     .counter {
         font-size: 22px;
     }
 
+    .counterBtn {
+        font-size: 40px;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        width: 230%; 
+        position: absolute;
+        left: -65%;
+    }
+
     .container .btn {
         width: 0%;
-        padding: 10px 120px;
+        padding: 10px 90px;
         font-size: 22px;
     }
 }
 
 @media screen and (min-width: 426px) and (max-width: 515px) {
-    .container {
-        padding-top: 20%;
-    }
+   
     .container .btn {
         width: 0%;
-        padding: 22px 154px;
+        padding: 22px 20px;
         font-size: 24px;
     }
 }
