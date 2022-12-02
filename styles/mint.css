@@ -11,6 +11,7 @@ body {
     background-image: url("../images/mint.png");
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center calc(100% + 100px);
     background-position: center top;
     font-family: pft-ak, sans-serif;
     overflow: hidden;
@@ -24,14 +25,11 @@ body {
     font-display: swap;
 }
 
-.pc img {
-    position:relative;
-    margin-bottom:-10px;
-    }
 
 .container {
     display: flex;
     justify-content: center;
+    
 }
 
 .mintWindow {
@@ -64,7 +62,6 @@ body {
 
 .container img {
     width: 100%;
-    height: auto;
     z-index: -1;
 }
 
@@ -136,20 +133,21 @@ body {
 @media screen and (max-width: 1440px) {
     .mintWindow {
         scale: 1;
-        top: 234px;
+        top: 0px;
     }
 }
+
 @media screen and (max-width: 1024px) {
     .mintWindow {
-        scale: 2;
-        top: 204px;
+        scale: 1;
+        top: 222px;
     }
 }
 
 @media screen and (max-width: 900px) {
     .mintWindow {
         scale: 2;
-        top: 400px;
+        top: 190px;
     }
 
     .counter {
@@ -161,7 +159,7 @@ body {
 @media screen and (max-width: 426px) {
     .mintWindow {
         scale: 2;
-        top: 462px;
+        top: 434px;
     }
 }
 
