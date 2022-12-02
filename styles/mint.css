@@ -1,6 +1,7 @@
 html,
 body {
     height: 100%;
+    overflow: hidden;
 }
 
 body {
@@ -8,8 +9,8 @@ body {
     min-height: 100%;
     background-color: white;
     background-image: url("../images/mint.png");
-    background-size: auto 100%;
-    background-repeat: fill;
+    background-size: cover;
+    background-repeat: contain;
     background-position: center top;
     font-family: pft-ak, sans-serif;
     overflow: hidden;
@@ -23,17 +24,16 @@ body {
     font-display: swap;
 }
 
-.container {
+.container { 
     display: flex;
     justify-content: center;
-    padding-top: 10%;
 }
 
 .mintWindow {
     display: flex;
     justify-content: center;
     position: relative;
-    width: 550px;
+    width: 100%;
 }
 
 .mintWindow img {
@@ -43,16 +43,16 @@ body {
 .counter {
     padding-top: 10px;
     position: absolute;
-    top: 16%;
+    top: 22%;
     display: flex;
     align-items: center;
     flex-direction: column;
     background: black;
-    color: #349465;
+    color: #009662;
     height: min-content;
-    font-size: 28px;
+    font-size: 72px;
     text-align: center;
-    width: 40%;
+    width: 22%;
 }
 
 .counterSection {
@@ -68,13 +68,14 @@ body {
 }
 
 .counterValue {
-    padding: 16px;
+    margin: auto;
+    padding: 24px;
 }
 
 .counterBtn {
     background: none;
     color: #349465;
-    font-size: 30px;
+    font-size: 100px;
     padding: 12px 26px;
     border: none;
     cursor: pointer;
@@ -82,19 +83,19 @@ body {
 
 .container .btn {
     position: absolute;
-    top: 73%;
-    left: 51%;
+    top: 71%;
+    left: 46%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     background-color: #349465;
     color: black;
-    font-size: 30px;
+    font-size: 38px;
     padding: 16px 150px;
     border: none;
     cursor: pointer;
     font-family: pft-ak, sans-serif;
     white-space: nowrap;
-    width: 385px;
+    width: 408px;
     display: flex;
     justify-content: center;
 }
@@ -102,6 +103,19 @@ body {
 .container .btn:hover {
     background-color: #235f42;
 }
+
+.loading {
+    font-weight: bold;
+    display:inline-block;
+    clip-path: inset(0 3ch 0 0);
+    animation: l 1s steps(4) infinite;
+  }
+  
+  @keyframes l {
+    to {
+      clip-path: inset(0 -1ch 0 0)
+    }
+  }
 
 @media screen and (max-width: 375px) {
     * {
@@ -126,7 +140,7 @@ body {
     }
 
     .mintWindow {
-        width: 380px;
+        width: 1000px;
     }
 
     .counter {
