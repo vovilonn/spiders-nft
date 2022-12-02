@@ -46,16 +46,24 @@ async function connectWallet() {
         refreshWL(account);
         state.connected = true;
         state.address = account;
-        mintBtn.text("MINT");
+        mintBtn.text(splitWallet(account));
+        // mintBtn.text("MINT");
     } catch (err) {
         console.log(err);
     }
+}
+
+function splitWallet(address) {
+    return address.substring(0, 4) + "..." + address.substring(address.length - 4);
 }
 
 async function refreshWL(address) {
     const res = await fetch(`https://api-gravediggers.defilab.space/check-with-statistic/${address.toUpperCase()}`);
     const isWhitelisted = await res.json();
     isWhitelistedEl.text(isWhitelisted ? "You are whitelisted" : "You are not whitelisted");
+    if (!isWhitelisted) {
+        isWhitelistedEl.css({ color: "red" });
+    }
 }
 
 mintBtn.click((e) => {
