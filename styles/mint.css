@@ -24,7 +24,7 @@ body {
     font-display: swap;
 }
 
-.container { 
+.container {
     display: flex;
     justify-content: center;
 }
@@ -54,7 +54,7 @@ body {
 .counterSection {
     display: flex;
     justify-content: center;
-    width: 184px;
+    width: 10vw;
 }
 
 .container img {
@@ -65,14 +65,14 @@ body {
 
 .counterValue {
     margin: auto;
-    padding: 24px;
+    /* padding: 18px; */
 }
 
 .counterBtn {
     background: none;
     color: #349465;
     font-size: 100px;
-    padding: 12px 26px;
+    padding: 0.8vh 4vw;
     border: none;
     cursor: pointer;
 }
@@ -83,85 +83,37 @@ body {
     left: 46%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
-    background-color: #349465;
+    background-color: #009662;
     color: black;
     font-size: 38px;
-    padding: 16px 150px;
+    padding: 0.7vh 4vw;
     border: none;
     cursor: pointer;
     font-family: pft-ak, sans-serif;
     white-space: nowrap;
-    width: 408px;
+    width: 22%;
     display: flex;
     justify-content: center;
+    font-size: 2vw;
+}
+.mintBtn{
+    padding-left: 8vw;
+    padding-right: 8vw;
 }
 
 .container .btn:hover {
     background-color: #235f42;
 }
 
-.loading {
-    font-weight: bold;
-    display:inline-block;
-    clip-path: inset(0 3ch 0 0);
-    animation: l 1s steps(4) infinite;
-  }
-  
-  @keyframes l {
-    to {
-      clip-path: inset(0 -1ch 0 0)
-    }
-  }
 
-@media screen and (min-width: 370px) and (max-width: 426px) {
-    
-    .mintWindow {
-        display: flex;
-        justify-content: center;
-        position: relative;
-        width: 90%;
-        bottom: -184px;
-    }
-
-    .counter {
-        font-size: 22px;
-    }
-
-    .counterBtn {
-        font-size: 40px;
-    }
-
-    .container {
-        display: flex;
-        justify-content: center;
-        width: 230%; 
-        position: absolute;
-        left: -65%;
-    }
-
-    .container .btn {
-        width: 0%;
-        padding: 10px 90px;
-        font-size: 22px;
-    }
+.counterBtn,
+.counterValue {
+    font-size: 4vw;
 }
 
-@media screen and (min-width: 426px) and (max-width: 515px) {
-   
-    .container .btn {
-        width: 0%;
-        padding: 22px 20px;
-        font-size: 24px;
-    }
-}
-
-@media screen and (min-width: 516px) and (max-width: 768px) {
-    .container {
-        padding-top: 20%;
-    }
-    .container .btn {
-        width: 0%;
-        padding: 22px 164px;
-        font-size: 24px;
+@media screen and (max-width: 900px) {
+    .mintWindow{
+        scale: 2;
+        top: 200px;
     }
 }
