@@ -102,8 +102,12 @@ body {
     padding-right: 8vw;
 }
 
+.btn {
+    transition: 0.1s linear;
+}
+
 .container .btn:hover {
-    background-color: #235f42;
+    color: rgb(255, 255, 255);
 }
 
 .loading {
