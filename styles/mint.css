@@ -96,7 +96,8 @@ body {
     justify-content: center;
     font-size: 2vw;
 }
-.mintBtn{
+
+.mintBtn {
     padding-left: 8vw;
     padding-right: 8vw;
 }
@@ -105,15 +106,33 @@ body {
     background-color: #235f42;
 }
 
+.loading {
+    font-weight: bold;
+    display: inline-block;
+    clip-path: inset(0 3ch 0 0);
+    animation: l 1s steps(4) infinite;
+    font-size: 4vw;
+    margin-left: 12px;
+}
 
 .counterBtn,
 .counterValue {
     font-size: 4vw;
 }
 
+@keyframes l {
+    to {
+        clip-path: inset(0 -1ch 0 0)
+    }
+}
+
 @media screen and (max-width: 900px) {
-    .mintWindow{
+    .mintWindow {
         scale: 2;
         top: 200px;
+    }
+
+    .counter {
+        padding-top: 0.4vh;
     }
 }
