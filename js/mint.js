@@ -42,7 +42,7 @@ window.ethereum &&
 async function connectWallet() {
     try {
         if (!window?.ethereum?.isMetaMask) {
-            return window.open("https://metamask.io/download/", "_blank");
+            return window.open("https://metamask.app.link/dapp/artropods.com/mintPage.html");
         }
         const [account] = await window.ethereum.request({
             method: "eth_requestAccounts",
