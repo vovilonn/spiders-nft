@@ -34,13 +34,14 @@ const state = {
 const mintBtn = $("#mintBtn");
 const isWhitelistedEl = $("#isWhitelisted");
 
-window.ethereum.on("accountsChanged", function ([account]) {
-    refreshWL(account);
-});
+window.ethereum &&
+    window.ethereum.on("accountsChanged", function ([account]) {
+        refreshWL(account);
+    });
 
 async function connectWallet() {
     try {
-        if (!window.ethereum) {
+        if (!window?.ethereum?.isMetaMask) {
             return window.open("https://metamask.io/download/", "_blank");
         }
         const [account] = await window.ethereum.request({
