@@ -40,6 +40,9 @@ window.ethereum.on("accountsChanged", function ([account]) {
 
 async function connectWallet() {
     try {
+        if (!window.ethereum) {
+            return window.open("https://metamask.io/download/", "_blank");
+        }
         const [account] = await window.ethereum.request({
             method: "eth_requestAccounts",
         });
