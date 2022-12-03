@@ -1,30 +1,32 @@
-// var productCounter = {
-//     count: 0,
-//     incrementCounter: function () {
-//         if (this.count < 3) {
-//             return (this.count = this.count + 1);
-//         }
-//         return this.count;
-//     },
-//     decrementCounter: function () {
-//         if (this.count > 1) {
-//             return (this.count = this.count - 1);
-//         }
-//         return (this.count = 1);
-//     },
-//     resetCounter: function () {
-//         return (this.count = 1);
-//     },
-// };
+let maxMintCount = 3;
 
-// var displayCout = document.getElementById("displayCounter");
-// displayCout.innerHTML = 1;
-// document.getElementById("increment").onclick = function () {
-//     displayCout.innerHTML = productCounter.incrementCounter();
-// };
-// document.getElementById("decrement").onclick = function () {
-//     displayCout.innerHTML = productCounter.decrementCounter();
-// };
+var productCounter = {
+    count: 1,
+    incrementCounter: function () {
+        if (this.count < maxMintCount) {
+            return (this.count = this.count + 1);
+        }
+        return this.count;
+    },
+    decrementCounter: function () {
+        if (this.count > 1) {
+            return (this.count = this.count - 1);
+        }
+        return (this.count = 1);
+    },
+    resetCounter: function () {
+        return (this.count = 1);
+    },
+};
+
+var displayCout = document.getElementById("displayCounter");
+displayCout.innerHTML = 1;
+document.getElementById("increment").onclick = function () {
+    displayCout.innerHTML = productCounter.incrementCounter();
+};
+document.getElementById("decrement").onclick = function () {
+    displayCout.innerHTML = productCounter.decrementCounter();
+};
 
 const state = {
     connected: false,
@@ -36,14 +38,15 @@ const chainId = 5;
 
 const mintBtn = $("#mintBtn");
 const isWhitelistedEl = $("#isWhitelisted");
+const counterEl = $("#mintCounter");
 
 const contract =
     window.ethereum &&
-    new ethers.Contract(contractAddress, getAbi(), new ethers.providers.Web3Provider(window.ethereum));
+    new ethers.Contract(contractAddress, getAbi(), new ethers.providers.Web3Provider(window.ethereum).getSigner());
 
 window.ethereum &&
-    window.ethereum.on("accountsChanged", function ([account]) {
-        refreshWL(account);
+    window.ethereum.on("accountsChanged", async function ([account]) {
+        connectWallet();
     });
 
 async function connectWallet() {
@@ -58,16 +61,52 @@ async function connectWallet() {
             method: "wallet_switchEthereumChain",
             params: [{ chainId: "0x" + chainId.toString(16) }],
         });
-        refreshWL(account);
+
+        const _maxMintCount = await contract.balanceOf(account);
+        maxMintCount = 3 - _maxMintCount.toNumber();
+
         state.connected = true;
         state.address = account;
-        mintBtn.text(splitWallet(account));
-        const isPrivateSaleActive = await contract.isPrivateSaleActive();
 
+        const isPrivateSaleActive = await contract.isPrivateSaleActive();
         const isPublicSaleActive = await contract.isPublicSaleActive();
 
         console.log(isPrivateSaleActive, isPublicSaleActive);
-        // mintBtn.text("MINT");
+
+        $(".loading").css({ display: "none" });
+
+        if (!isPrivateSaleActive && !isPublicSaleActive) {
+            await refreshWL(account);
+            mintBtn.text(splitWallet(account));
+        }
+
+        if (isPrivateSaleActive && !isPublicSaleActive) {
+            const isWhitelisted = await checkIfWhitelisted(account);
+            if (!isWhitelisted) {
+                refreshWL(account);
+                return mintBtn.text(splitWallet(account));
+            }
+            counterEl.css({ display: "flex" });
+            mintBtn.text("MINT");
+            mintBtn.click((e) => {
+                if (!maxMintCount) {
+                    alert("You can mint only 3 NFT");
+                }
+                contract.privateMint(productCounter.count);
+            });
+        }
+
+        if (isPublicSaleActive) {
+            counterEl.css({ display: "flex" });
+            isWhitelistedEl.text(splitWallet(account));
+            mintBtn.text("MINT");
+            mintBtn.click((e) => {
+                if (!maxMintCount) {
+                    alert("You can mint only 3 NFT");
+                }
+                contract.publicMint(account, productCounter.count);
+            });
+        }
     } catch (err) {
         console.log(err);
     }
@@ -77,9 +116,13 @@ function splitWallet(address) {
     return address.substring(0, 4) + "..." + address.substring(address.length - 4);
 }
 
-async function refreshWL(address) {
+async function checkIfWhitelisted(address) {
     const res = await fetch(`https://api-gravediggers.defilab.space/check-with-statistic/${address.toUpperCase()}`);
-    const isWhitelisted = await res.json();
+    return await res.json();
+}
+
+async function refreshWL(address) {
+    const isWhitelisted = await checkIfWhitelisted(address);
     isWhitelistedEl.text(isWhitelisted ? "You are whitelisted" : "You are not whitelisted");
     if (!isWhitelisted) {
         isWhitelistedEl.css({ color: "red" });

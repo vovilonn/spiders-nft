@@ -24,6 +24,16 @@ body {
     font-display: swap;
 }
 
+.yanw {
+    display: inline-block;
+    font-size: 60%;
+    margin-left: 12px;
+}
+
+.loading {
+    display: none;
+}
+
 .container {
     display: flex;
     justify-content: center;
@@ -120,6 +130,8 @@ body {
     display: inline-block;
     font-size: 60%;
     margin-left: 12px;
+    clip-path: inset(0 3ch 0 0);
+    animation: l 1s steps(4) infinite;
 }
 
 .counterBtn,
@@ -135,6 +147,10 @@ body {
 
 @media screen and (max-width: 450px) {
     .loading {
+        font-size: 40%;
+    }
+
+    .yanw {
         font-size: 40%;
     }
 
