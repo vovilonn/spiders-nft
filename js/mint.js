@@ -194,6 +194,7 @@ async function refreshTimer() {
 
 mintBtn.click((e) => {
     connectWallet();
+    mintBtn.off("click");
 });
 
 function getAbi() {
