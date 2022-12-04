@@ -61,9 +61,12 @@ async function init() {
     const isPublicSaleActive = await contractRpc.publicSaleActive();
 
     if (isPrivateSaleActive || isPublicSaleActive) {
-        mintBtn.text("CONNECT WALLET");
+        return mintBtn.text("CONNECT WALLET");
     }
+    mintBtn.text("CHECK WALLET");
 }
+
+init();
 
 async function connectWallet() {
     try {
