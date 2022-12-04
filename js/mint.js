@@ -129,7 +129,7 @@ async function connectWallet() {
             mintBtn.text("MINT");
             mintBtn.click((e) => {
                 if (maxMintCount <= 0) {
-                    alert("You can mint only 3 NFT");
+                    return alert("You can mint only 3 NFT");
                 }
                 contract.publicSaleMint(productCounter.count, { value: mintPrice.mul(productCounter.count) });
             });
