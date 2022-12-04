@@ -27,7 +27,7 @@ body {
 .yanw {
     display: inline-block;
     font-size: 60%;
-    margin-left: 12px;
+    color: red;
 }
 
 .loading {
@@ -44,13 +44,21 @@ body {
 .mintWindow {
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
     position: relative;
     width: 690px;
     bottom: 100px;
 }
 
 .mintWindow img {
-    min-width: 100%;
+    width: 100%;
+}
+
+.countdown {
+    margin-bottom: 20px;
+    font-size: 40%;
+    display: inline-block;
 }
 
 .counter {
@@ -60,12 +68,11 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
-    background: black;
     color: #009662;
     height: min-content;
     font-size: 72px;
     text-align: center;
-    width: 22%;
+    width: 100%;
 }
 
 .counterSection {
@@ -87,7 +94,6 @@ body {
 .counterBtn {
     background: none;
     color: #349465;
-    font-size: 100px;
     padding: 0.8vh 4vw;
     border: none;
     cursor: pointer;
@@ -129,14 +135,17 @@ body {
     font-weight: bold;
     display: inline-block;
     font-size: 60%;
-    margin-left: 12px;
     clip-path: inset(0 3ch 0 0);
     animation: l 1s steps(4) infinite;
 }
 
 .counterBtn,
 .counterValue {
-    font-size: 4vw;
+    font-size: 70%;
+}
+
+.mintedCounter {
+    font-size: 55%;
 }
 
 @keyframes l {
@@ -145,11 +154,54 @@ body {
     }
 }
 
-@media screen and (max-width: 450px) {
-    .loading {
+@media screen and (max-width: 500px) {
+    .loading,
+    .mintedCounter,
+    .yanw {
         font-size: 40%;
     }
 
+    .counter {
+        top: 12%;
+    }
+
+    .container .btn {
+        font-size: 22px;
+    }
+    .countdown {
+        font-size: 25%;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .loading,
+    .mintedCounter,
+    .yanw {
+        font-size: 30%;
+    }
+
+    .container .btn {
+        font-size: 16px;
+    }
+
+    .countdown {
+        font-size: 20%;
+    }
+}
+
+@media screen and (max-height: 900px) {
+    .mintWindow img {
+        width: 80%;
+    }
+}
+
+@media screen and (max-height: 768px) {
+    .mintWindow img {
+        width: 65%;
+    }
+
+    .loading,
+    .mintedCounter,
     .yanw {
         font-size: 40%;
     }
@@ -159,8 +211,33 @@ body {
     }
 }
 
-/* @media screen and (max-width: 900px) {
-    .counter {
-        padding-top: 0.4vh;
+@media screen and (max-height: 768px) and (max-width: 500px) {
+    .loading,
+    .mintedCounter,
+    .yanw {
+        font-size: 25%;
     }
-} */
+    .counter {
+        top: 10%;
+    }
+    .container .btn {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-height: 768px) and (max-width: 600px) {
+    .countdown {
+        font-size: 25%;
+    }
+}
+
+@media screen and (max-height: 768px) and (max-width: 360px) {
+    .loading,
+    .mintedCounter,
+    .yanw {
+        font-size: 25%;
+    }
+    .container .btn {
+        font-size: 12px;
+    }
+}

@@ -3,11 +3,11 @@
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Mint page</title>
         <link rel="shortcut icon" href="images/logo3.png" type="image/x-icon" />
         <link rel="stylesheet" href="./styles/styles.css" />
         <link rel="stylesheet" href="./styles/mint.css" />
+        <meta name="viewport" content="width=device-width,user-scalable=no" />
     </head>
     <body>
         <header class="header">
@@ -66,13 +66,16 @@
             <div class="mintWindow">
                 <img class="pc" src="./images/mintWindow.png" />
                 <div class="counter">
+                    <div class="countdown" id="countdown"></div>
                     <div class="loading">Loading...</div>
+
                     <div class="yanw" id="isWhitelisted"></div>
                     <div id="mintCounter" class="counterSection" style="display: none">
                         <button id="decrement" class="counterBtn">-</button>
                         <div id="displayCounter" class="counterValue">1</div>
                         <button id="increment" class="counterBtn">+</button>
                     </div>
+                    <div class="mintedCounter" id="mintedCounter"></div>
                 </div>
                 <button class="btn" id="mintBtn">CHECK WALLET</button>
             </div>
@@ -83,6 +86,7 @@
             crossorigin="anonymous"
         ></script>
         <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+        <script src="./js/timer.js"></script>
         <script src="./js/mint.js"></script>
     </body>
 </html>

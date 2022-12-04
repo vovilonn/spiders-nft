@@ -19,6 +19,10 @@ var productCounter = {
     },
 };
 
+setInterval(() => {
+    refreshTimer();
+}, 1000);
+
 var displayCout = document.getElementById("displayCounter");
 displayCout.innerHTML = 1;
 document.getElementById("increment").onclick = function () {
@@ -33,7 +37,7 @@ const state = {
     address: null,
 };
 
-const contractAddress = "0x8b6d4a90D6bb1359ebB6bDbd5df0fc32D83696E0";
+const contractAddress = "0xF8ff0ABa468a9217698331bA1571afd0bf8D5d34";
 const chainId = 5;
 
 const mintBtn = $("#mintBtn");
@@ -57,6 +61,7 @@ async function connectWallet() {
         const [account] = await window.ethereum.request({
             method: "eth_requestAccounts",
         });
+
         await window.ethereum.request({
             method: "wallet_switchEthereumChain",
             params: [{ chainId: "0x" + chainId.toString(16) }],
@@ -68,45 +73,71 @@ async function connectWallet() {
         state.connected = true;
         state.address = account;
 
-        const isPrivateSaleActive = await contract.isPrivateSaleActive();
-        const isPublicSaleActive = await contract.isPublicSaleActive();
+        const isPrivateSaleActive = await contract.presaleActive();
+        const isPublicSaleActive = await contract.publicSaleActive();
 
-        console.log(isPrivateSaleActive, isPublicSaleActive);
-
-        $(".loading").css({ display: "none" });
+        const mintPrice = await contract.mintPrice();
 
         if (!isPrivateSaleActive && !isPublicSaleActive) {
+            hideLoading();
             await refreshWL(account);
             mintBtn.text(splitWallet(account));
         }
 
         if (isPrivateSaleActive && !isPublicSaleActive) {
             const isWhitelisted = await checkIfWhitelisted(account);
+            hideLoading(false);
+            $(".countdown").hide();
             if (!isWhitelisted) {
                 refreshWL(account);
                 return mintBtn.text(splitWallet(account));
             }
+            hideLoading(true);
+            isWhitelistedEl.css({ color: "#009662" });
             counterEl.css({ display: "flex" });
             mintBtn.text("MINT");
-            mintBtn.click((e) => {
+            mintBtn.click(async (e) => {
                 if (!maxMintCount) {
-                    alert("You can mint only 3 NFT");
+                    return alert("You can mint only 3 NFT");
                 }
-                contract.privateMint(productCounter.count);
+                await contract.preSaleMint(productCounter.count, { value: mintPrice.mul(productCounter.count) });
+                alert("After the transaction is completed, NFT will be minted within 3 minutes");
             });
         }
 
         if (isPublicSaleActive) {
             counterEl.css({ display: "flex" });
-            isWhitelistedEl.text(splitWallet(account));
+            $(".countdown").hide();
+            hideLoading(true);
+            isWhitelistedEl.css({ color: "#009662" });
             mintBtn.text("MINT");
             mintBtn.click((e) => {
                 if (!maxMintCount) {
                     alert("You can mint only 3 NFT");
                 }
-                contract.publicMint(account, productCounter.count);
+                contract.publicSaleMint(account, productCounter.count, { value: mintPrice.mul(productCounter.count) });
             });
         }
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+function hideLoading(countdown = false) {
+    $(".loading").hide();
+    if (countdown) {
+        refreshMintedCounter();
+        setInterval(() => {
+            refreshMintedCounter();
+        }, 50000);
+    }
+}
+
+async function refreshMintedCounter() {
+    try {
+        const max = await contract.maxMintSupply();
+        const current = await contract.totalSupply();
+        $("#mintedCounter").text(`${current}/${max}`);
     } catch (err) {
         console.log(err);
     }
@@ -123,10 +154,20 @@ async function checkIfWhitelisted(address) {
 
 async function refreshWL(address) {
     const isWhitelisted = await checkIfWhitelisted(address);
-    isWhitelistedEl.text(isWhitelisted ? "You are whitelisted" : "You are not whitelisted");
+    isWhitelistedEl.html(isWhitelisted ? "You are<br/>whitelisted" : "You are not<br/>whitelisted");
     if (!isWhitelisted) {
-        isWhitelistedEl.css({ color: "red" });
+        return isWhitelistedEl.css({ color: "red" });
     }
+    isWhitelistedEl.css({ color: "#009662" });
+}
+
+function refreshTimer() {
+    const { days, hours, minutes, seconds } = getRemainingTime();
+    if (seconds < 0) {
+        $(".loading").hide();
+        return $("#countdown").text("SALE ACTIVE");
+    }
+    $("#countdown").text(`${days}d ${hours}h ${minutes}m ${seconds}s`);
 }
 
 mintBtn.click((e) => {
@@ -136,22 +177,18 @@ mintBtn.click((e) => {
 function getAbi() {
     return [
         {
-            inputs: [
-                { internalType: "string", name: "name_", type: "string" },
-                { internalType: "string", name: "symbol_", type: "string" },
-                { internalType: "string", name: "apiURL_", type: "string" },
-            ],
+            inputs: [{ internalType: "string", name: "_apiUrl", type: "string" }],
             stateMutability: "nonpayable",
             type: "constructor",
         },
         { inputs: [], name: "ApprovalCallerNotOwnerNorApproved", type: "error" },
         { inputs: [], name: "ApprovalQueryForNonexistentToken", type: "error" },
-        { inputs: [], name: "ApprovalToCurrentOwner", type: "error" },
-        { inputs: [], name: "ApproveToCaller", type: "error" },
         { inputs: [], name: "BalanceQueryForZeroAddress", type: "error" },
+        { inputs: [], name: "MintERC2309QuantityExceedsLimit", type: "error" },
         { inputs: [], name: "MintToZeroAddress", type: "error" },
         { inputs: [], name: "MintZeroQuantity", type: "error" },
         { inputs: [], name: "OwnerQueryForNonexistentToken", type: "error" },
+        { inputs: [], name: "OwnershipNotInitializedForExtraData", type: "error" },
         { inputs: [], name: "TransferCallerNotOwnerNorApproved", type: "error" },
         { inputs: [], name: "TransferFromIncorrectOwner", type: "error" },
         { inputs: [], name: "TransferToNonERC721ReceiverImplementer", type: "error" },
@@ -198,19 +235,21 @@ function getAbi() {
         {
             anonymous: false,
             inputs: [
-                { indexed: true, internalType: "address", name: "previousOwner", type: "address" },
-                { indexed: true, internalType: "address", name: "newOwner", type: "address" },
+                { indexed: true, internalType: "uint256", name: "fromTokenId", type: "uint256" },
+                { indexed: false, internalType: "uint256", name: "toTokenId", type: "uint256" },
+                { indexed: true, internalType: "address", name: "from", type: "address" },
+                { indexed: true, internalType: "address", name: "to", type: "address" },
             ],
-            name: "OwnershipTransferred",
+            name: "ConsecutiveTransfer",
             type: "event",
         },
         {
             anonymous: false,
             inputs: [
-                { indexed: true, internalType: "bytes32", name: "requestId", type: "bytes32" },
-                { indexed: true, internalType: "bool", name: "boolean", type: "bool" },
+                { indexed: true, internalType: "address", name: "previousOwner", type: "address" },
+                { indexed: true, internalType: "address", name: "newOwner", type: "address" },
             ],
-            name: "RequestBoolFulfilled",
+            name: "OwnershipTransferred",
             type: "event",
         },
         {
@@ -226,11 +265,18 @@ function getAbi() {
         {
             inputs: [
                 { internalType: "bytes32", name: "_requestId", type: "bytes32" },
-                { internalType: "bool", name: "_boolean", type: "bool" },
+                { internalType: "bool", name: "_isWhitelisted", type: "bool" },
             ],
-            name: "_mint",
+            name: "_chainlinkMint",
             outputs: [],
             stateMutability: "nonpayable",
+            type: "function",
+        },
+        {
+            inputs: [],
+            name: "apiUrl",
+            outputs: [{ internalType: "string", name: "", type: "string" }],
+            stateMutability: "view",
             type: "function",
         },
         {
@@ -240,7 +286,7 @@ function getAbi() {
             ],
             name: "approve",
             outputs: [],
-            stateMutability: "nonpayable",
+            stateMutability: "payable",
             type: "function",
         },
         {
@@ -251,9 +297,37 @@ function getAbi() {
             type: "function",
         },
         {
+            inputs: [],
+            name: "baseURI",
+            outputs: [{ internalType: "string", name: "", type: "string" }],
+            stateMutability: "view",
+            type: "function",
+        },
+        {
+            inputs: [{ internalType: "uint256", name: "_supply", type: "uint256" }],
+            name: "changeMaxSupply",
+            outputs: [],
+            stateMutability: "nonpayable",
+            type: "function",
+        },
+        {
             inputs: [{ internalType: "uint256", name: "tokenId", type: "uint256" }],
             name: "getApproved",
             outputs: [{ internalType: "address", name: "", type: "address" }],
+            stateMutability: "view",
+            type: "function",
+        },
+        {
+            inputs: [],
+            name: "getRefundGuaranteeEndTime",
+            outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+            stateMutability: "view",
+            type: "function",
+        },
+        {
+            inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+            name: "hasRefunded",
+            outputs: [{ internalType: "bool", name: "", type: "bool" }],
             stateMutability: "view",
             type: "function",
         },
@@ -269,15 +343,36 @@ function getAbi() {
         },
         {
             inputs: [],
-            name: "isPrivateSaleActive",
+            name: "isRefundGuaranteeActive",
             outputs: [{ internalType: "bool", name: "", type: "bool" }],
             stateMutability: "view",
             type: "function",
         },
         {
             inputs: [],
-            name: "isPublicSaleActive",
+            name: "isReveiled",
             outputs: [{ internalType: "bool", name: "", type: "bool" }],
+            stateMutability: "view",
+            type: "function",
+        },
+        {
+            inputs: [],
+            name: "maxMintSupply",
+            outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+            stateMutability: "view",
+            type: "function",
+        },
+        {
+            inputs: [],
+            name: "maxUserMintAmount",
+            outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+            stateMutability: "view",
+            type: "function",
+        },
+        {
+            inputs: [],
+            name: "mintPrice",
+            outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
             stateMutability: "view",
             type: "function",
         },
@@ -285,6 +380,13 @@ function getAbi() {
             inputs: [],
             name: "name",
             outputs: [{ internalType: "string", name: "", type: "string" }],
+            stateMutability: "view",
+            type: "function",
+        },
+        {
+            inputs: [{ internalType: "address", name: "_address", type: "address" }],
+            name: "numberMinted",
+            outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
             stateMutability: "view",
             type: "function",
         },
@@ -303,23 +405,76 @@ function getAbi() {
             type: "function",
         },
         {
-            inputs: [{ internalType: "uint8", name: "_quantity", type: "uint8" }],
-            name: "privateMint",
+            inputs: [{ internalType: "uint256", name: "amount", type: "uint256" }],
+            name: "preSaleMint",
+            outputs: [{ internalType: "bytes32", name: "requestId", type: "bytes32" }],
+            stateMutability: "payable",
+            type: "function",
+        },
+        {
+            inputs: [],
+            name: "presaleActive",
+            outputs: [{ internalType: "bool", name: "", type: "bool" }],
+            stateMutability: "view",
+            type: "function",
+        },
+        {
+            inputs: [],
+            name: "publicSaleActive",
+            outputs: [{ internalType: "bool", name: "", type: "bool" }],
+            stateMutability: "view",
+            type: "function",
+        },
+        {
+            inputs: [{ internalType: "uint256", name: "amount", type: "uint256" }],
+            name: "publicSaleMint",
+            outputs: [],
+            stateMutability: "payable",
+            type: "function",
+        },
+        {
+            inputs: [{ internalType: "uint256[]", name: "tokenIds", type: "uint256[]" }],
+            name: "refund",
             outputs: [],
             stateMutability: "nonpayable",
             type: "function",
         },
         {
-            inputs: [
-                { internalType: "address", name: "user", type: "address" },
-                { internalType: "uint8", name: "amount", type: "uint8" },
-            ],
-            name: "publicMint",
-            outputs: [],
-            stateMutability: "nonpayable",
+            inputs: [],
+            name: "refundAddress",
+            outputs: [{ internalType: "address", name: "", type: "address" }],
+            stateMutability: "view",
+            type: "function",
+        },
+        {
+            inputs: [],
+            name: "refundAmount",
+            outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+            stateMutability: "view",
+            type: "function",
+        },
+        {
+            inputs: [],
+            name: "refundEndTime",
+            outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+            stateMutability: "view",
+            type: "function",
+        },
+        {
+            inputs: [],
+            name: "refundPeriod",
+            outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+            stateMutability: "view",
             type: "function",
         },
         { inputs: [], name: "renounceOwnership", outputs: [], stateMutability: "nonpayable", type: "function" },
+        {
+            inputs: [],
+            name: "response",
+            outputs: [{ internalType: "bool", name: "", type: "bool" }],
+            stateMutability: "view",
+            type: "function",
+        },
         {
             inputs: [
                 { internalType: "address", name: "from", type: "address" },
@@ -328,7 +483,7 @@ function getAbi() {
             ],
             name: "safeTransferFrom",
             outputs: [],
-            stateMutability: "nonpayable",
+            stateMutability: "payable",
             type: "function",
         },
         {
@@ -340,6 +495,13 @@ function getAbi() {
             ],
             name: "safeTransferFrom",
             outputs: [],
+            stateMutability: "payable",
+            type: "function",
+        },
+        {
+            inputs: [{ internalType: "string", name: "uri", type: "string" }],
+            name: "serUnreveiledUri",
+            outputs: [],
             stateMutability: "nonpayable",
             type: "function",
         },
@@ -349,6 +511,20 @@ function getAbi() {
                 { internalType: "bool", name: "approved", type: "bool" },
             ],
             name: "setApprovalForAll",
+            outputs: [],
+            stateMutability: "nonpayable",
+            type: "function",
+        },
+        {
+            inputs: [{ internalType: "string", name: "uri", type: "string" }],
+            name: "setBaseURI",
+            outputs: [],
+            stateMutability: "nonpayable",
+            type: "function",
+        },
+        {
+            inputs: [{ internalType: "address", name: "_refundAddress", type: "address" }],
+            name: "setRefundAddress",
             outputs: [],
             stateMutability: "nonpayable",
             type: "function",
@@ -367,8 +543,10 @@ function getAbi() {
             stateMutability: "view",
             type: "function",
         },
-        { inputs: [], name: "togglePrivateMint", outputs: [], stateMutability: "nonpayable", type: "function" },
-        { inputs: [], name: "togglePublicMint", outputs: [], stateMutability: "nonpayable", type: "function" },
+        { inputs: [], name: "togglePresaleStatus", outputs: [], stateMutability: "nonpayable", type: "function" },
+        { inputs: [], name: "togglePublicSaleStatus", outputs: [], stateMutability: "nonpayable", type: "function" },
+        { inputs: [], name: "toggleRefundCountdown", outputs: [], stateMutability: "nonpayable", type: "function" },
+        { inputs: [], name: "toggleReveil", outputs: [], stateMutability: "nonpayable", type: "function" },
         {
             inputs: [{ internalType: "uint256", name: "tokenId", type: "uint256" }],
             name: "tokenURI",
@@ -391,7 +569,7 @@ function getAbi() {
             ],
             name: "transferFrom",
             outputs: [],
-            stateMutability: "nonpayable",
+            stateMutability: "payable",
             type: "function",
         },
         {
@@ -401,5 +579,13 @@ function getAbi() {
             stateMutability: "nonpayable",
             type: "function",
         },
+        {
+            inputs: [],
+            name: "unreveiledUri",
+            outputs: [{ internalType: "string", name: "", type: "string" }],
+            stateMutability: "view",
+            type: "function",
+        },
+        { inputs: [], name: "withdraw", outputs: [], stateMutability: "nonpayable", type: "function" },
     ];
 }
