@@ -113,7 +113,7 @@ async function connectWallet() {
             counterEl.css({ display: "flex" });
             mintBtn.text("MINT");
             mintBtn.click(async (e) => {
-                if (!maxMintCount) {
+                if (maxMintCount <= 0) {
                     return alert("You can mint only 3 NFT");
                 }
                 await contract.preSaleMint(productCounter.count, { value: mintPrice.mul(productCounter.count) });
@@ -128,7 +128,7 @@ async function connectWallet() {
             isWhitelistedEl.css({ color: "#009662" });
             mintBtn.text("MINT");
             mintBtn.click((e) => {
-                if (!maxMintCount) {
+                if (maxMintCount <= 0) {
                     alert("You can mint only 3 NFT");
                 }
                 contract.publicSaleMint(productCounter.count, { value: mintPrice.mul(productCounter.count) });
