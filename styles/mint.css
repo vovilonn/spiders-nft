@@ -173,6 +173,12 @@ body {
     }
 }
 
+@media screen and (max-width: 430px) {
+    .countdown {
+        font-size: 22%;
+    }
+}
+
 @media screen and (max-width: 360px) {
     .loading,
     .mintedCounter,
@@ -215,7 +221,7 @@ body {
     .loading,
     .mintedCounter,
     .yanw {
-        font-size: 25%;
+        font-size: 22%;
     }
     .counter {
         top: 10%;
@@ -231,11 +237,20 @@ body {
     }
 }
 
+@media screen and (max-height: 768px) and (max-width: 430px) {
+    .countdown {
+        font-size: 20%;
+    }
+}
+
 @media screen and (max-height: 768px) and (max-width: 360px) {
     .loading,
     .mintedCounter,
     .yanw {
         font-size: 25%;
+    }
+    .countdown {
+        font-size: 18%;
     }
     .container .btn {
         font-size: 12px;
