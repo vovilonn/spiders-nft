@@ -38,6 +38,7 @@ const state = {
 };
 
 const contractAddress = "0xF8ff0ABa468a9217698331bA1571afd0bf8D5d34";
+const rpcUrl = "https://eth-goerli.public.blastapi.io";
 const chainId = 5;
 
 const mintBtn = $("#mintBtn");
@@ -47,17 +48,29 @@ const counterEl = $("#mintCounter");
 const contract =
     window.ethereum &&
     new ethers.Contract(contractAddress, getAbi(), new ethers.providers.Web3Provider(window.ethereum).getSigner());
+const contractRpc =
+    window.ethereum && new ethers.Contract(contractAddress, getAbi(), new ethers.providers.JsonRpcProvider(rpcUrl));
 
 window.ethereum &&
     window.ethereum.on("accountsChanged", async function ([account]) {
         connectWallet();
     });
 
+async function init() {
+    const isPrivateSaleActive = await contractRpc.presaleActive();
+    const isPublicSaleActive = await contractRpc.publicSaleActive();
+
+    if (isPrivateSaleActive || isPublicSaleActive) {
+        mintBtn.text("CONNECT WALLET");
+    }
+}
+
 async function connectWallet() {
     try {
         if (!window?.ethereum?.isMetaMask) {
             return window.open("https://metamask.app.link/dapp/artropods.com/mintPage.html");
         }
+
         const [account] = await window.ethereum.request({
             method: "eth_requestAccounts",
         });
@@ -161,11 +174,17 @@ async function refreshWL(address) {
     isWhitelistedEl.css({ color: "#009662" });
 }
 
-function refreshTimer() {
+async function refreshTimer() {
     const { days, hours, minutes, seconds } = getRemainingTime();
     if (seconds < 0) {
-        $(".loading").hide();
-        return $("#countdown").text("SALE IS ACTIVE");
+        const isPrivateSaleActive = await contractRpc.presaleActive();
+        const isPublicSaleActive = await contractRpc.publicSaleActive();
+        if (isPrivateSaleActive || isPublicSaleActive) {
+            $(".loading").hide();
+
+            return $("#countdown").text("SALE IS ACTIVE");
+        }
+        return;
     }
     $("#countdown").text(`${days}d ${hours}h ${minutes}m ${seconds}s`);
 }
