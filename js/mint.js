@@ -165,7 +165,7 @@ function refreshTimer() {
     const { days, hours, minutes, seconds } = getRemainingTime();
     if (seconds < 0) {
         $(".loading").hide();
-        return $("#countdown").text("SALE ACTIVE");
+        return $("#countdown").text("SALE IS ACTIVE");
     }
     $("#countdown").text(`${days}d ${hours}h ${minutes}m ${seconds}s`);
 }
