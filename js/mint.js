@@ -37,7 +37,7 @@ const state = {
     address: null,
 };
 
-const contractAddress = "0xF8ff0ABa468a9217698331bA1571afd0bf8D5d34";
+const contractAddress = "0x0B70B0Fc3102fA4719EF1C73F5D2A0734D4D2331";
 const rpcUrl = "https://eth-goerli.public.blastapi.io";
 const chainId = 5;
 
