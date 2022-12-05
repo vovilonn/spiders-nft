@@ -69,6 +69,12 @@ async function init() {
 
 init();
 
+async function refreshMaxMinted(account) {
+    const _maxMintCount = await contract.numberMinted(account);
+    maxMintCount = 3 - _maxMintCount.toNumber();
+    displayCout.innerHTML = maxMintCount;
+}
+
 async function connectWallet() {
     try {
         if (!window?.ethereum?.isMetaMask) {
@@ -84,8 +90,7 @@ async function connectWallet() {
             params: [{ chainId: "0x" + chainId.toString(16) }],
         });
 
-        const _maxMintCount = await contract.numberMinted(account);
-        maxMintCount = 3 - _maxMintCount.toNumber();
+        refreshMaxMinted(account);
 
         state.connected = true;
         state.address = account;
@@ -118,9 +123,11 @@ async function connectWallet() {
                     return alert("You can mint only 3 NFT");
                 }
                 const { signature } = await getWlSignature(account);
-                await contract.preSaleMint(productCounter.count, signature, {
+                const tx = await contract.preSaleMint(productCounter.count, signature, {
                     value: mintPrice.mul(productCounter.count),
                 });
+                await tx.wait();
+                refreshMaxMinted(account);
             });
         }
 
@@ -130,11 +137,15 @@ async function connectWallet() {
             hideLoading(true);
             isWhitelistedEl.css({ color: "#009662" });
             mintBtn.text("MINT");
-            mintBtn.click((e) => {
+            mintBtn.click(async (e) => {
                 if (maxMintCount <= 0) {
                     return alert("You can mint only 3 NFT");
                 }
-                contract.publicSaleMint(productCounter.count, { value: mintPrice.mul(productCounter.count) });
+                const tx = await contract.publicSaleMint(productCounter.count, {
+                    value: mintPrice.mul(productCounter.count),
+                });
+                await tx.wait();
+                refreshMaxMinted(account);
             });
         }
     } catch (err) {
