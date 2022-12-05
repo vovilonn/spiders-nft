@@ -37,10 +37,10 @@ const state = {
     address: null,
 };
 
-const contractAddress = "0x49A3857779153A47e94F6dfff063848E4E0efc1f";
-const rpcUrl = "https://eth-goerli.public.blastapi.io";
+const contractAddress = "0xAAA6eF85caaFAD034065a9760f57f2a3a934A2B9";
+const rpcUrl = "https://rpc.sepolia.org";
 
-const chainId = 5;
+const chainId = 11155111;
 
 const mintBtn = $("#mintBtn");
 const isWhitelistedEl = $("#isWhitelisted");
