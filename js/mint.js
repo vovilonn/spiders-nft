@@ -37,7 +37,7 @@ const state = {
     address: null,
 };
 
-const contractAddress = "0xAAA6eF85caaFAD034065a9760f57f2a3a934A2B9";
+const contractAddress = "0xCAc16f8822aBc800e0fE502b17e941B2486Fb8aD";
 const rpcUrl = "https://rpc.sepolia.org";
 
 const chainId = 11155111;
