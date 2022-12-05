@@ -83,7 +83,7 @@ async function connectWallet() {
             params: [{ chainId: "0x" + chainId.toString(16) }],
         });
 
-        const _maxMintCount = await contract.balanceOf(account);
+        const _maxMintCount = await contract.numberMinted(account);
         maxMintCount = 3 - _maxMintCount.toNumber();
 
         state.connected = true;
