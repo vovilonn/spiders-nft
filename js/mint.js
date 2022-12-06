@@ -37,7 +37,7 @@ const state = {
     address: null,
 };
 
-const contractAddress = "0x049Eaedb92d29c3aef072E44AE57F9ADaF598293";
+const contractAddress = "0xCAc16f8822aBc800e0fE502b17e941B2486Fb8aD";
 const rpcUrl = "https://eth-goerli.public.blastapi.io";
 
 const chainId = 5;
@@ -170,7 +170,7 @@ function hideLoading(countdown = false) {
         refreshMintedCounter();
         setInterval(() => {
             refreshMintedCounter();
-        }, 50000);
+        }, 2000);
     }
 }
 
